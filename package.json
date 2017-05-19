@@ -12,6 +12,7 @@
     "express-session": "^1.15.2",
     "form-scraper": "0.0.4",
     "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
     "logger": "0.0.1",
     "mongodb": "^2.2.26",
     "morgan": "^1.8.1",
