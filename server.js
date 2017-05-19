@@ -20,6 +20,10 @@ var app = express();
 // Express settings
 require('./lib/config/express')(app);
 
+app.listen(config.port, function () {
+  console.log('Express server listening on port %d in %s mode', config.port, app.get('env'));
+});
+
 // app.use(bodyParser.urlencoded());
 // app.use(bodyParser.json());
 
