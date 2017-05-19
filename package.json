@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "dependencies": {
+    "api-ai-javascript": "^2.0.0-beta.14",
     "body-parser": "^1.17.1",
     "casperjs": "^1.1.3",
     "cheerio": "^0.22.0",
