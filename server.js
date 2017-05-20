@@ -105,7 +105,7 @@ var yourAction = function(request, response) {
 		returnDate.setDate(departuredate.getDate() + 1); 
 		var depWindow = reqBody.dep_time;
 		depWindow = parseInt(depWindow.substring(0,2));
-		var secondDepWindow += 3;
+		var secondDepWindow = depWindow+3;
 		depWindow = depWindow.toString()+'00'+secondDepWindow+'00';
 		// var depWindow = '09001200';
 		console.log(origin+' '+destination+' ' +formatDate(departureDate)+ ' '+formatDate(returnDate)+ ' '+depWindow);
