@@ -26,6 +26,17 @@ require('./lib/config/express')(app);
 
 app.listen(config.port, function () {
   console.log('Express server listening on port %d in %s mode', config.port, app.get('env'));
+  //   		var origin = 'DFW';
+  // 		var destination = 'LAX';
+  // 		var departureDate = new Date();
+		// var returnDate = new Date();
+		// returnDate.setDate(departureDate.getDate() + 1); 
+		// var depWindow = '09001200';
+  // 		sabre.requestFlightInfo(origin,destination,formatDate(departureDate),formatDate(returnDate),depWindow).then(function(data){
+  // 			//sendback data
+  // 			console.log("sendback");
+
+  // 		});
   //mail.sendEmail();
   //sabre.requestFlightInfo();
  //  api.get(getFlights, function (error,result){
@@ -63,40 +74,52 @@ var yourAction = function(request, response) {
   console.log('Request body: ' + JSON.stringify(request.body));
 
   // Fulfill action business logic
-  function responseHandler (app) {
+  function flightResponseHandler (app) {
 
-  	console.log("HEREEEEEEEEEEEEEEE");
     // Complete your fulfillment logic and send a response
 
     //get entities
-  //   var test = [ { totalFare: '366.40',
-  //   flightNumber: 23,
-  //   deptDateTime: '2017-07-07T05:50:00',
-  //   arrivalDateTime: '2017-07-07T08:44:00' },
-  // { totalFare: '366.40',
-  //   flightNumber: 171,
-  //   deptDateTime: '2017-07-07T06:00:00',
-  //   arrivalDateTime: '2017-07-07T09:10:00' },
-  // { totalFare: '366.40',
-  //   flightNumber: 171,
-  //   deptDateTime: '2017-07-07T06:00:00',
-  //   arrivalDateTime: '2017-07-07T09:10:00' } ];
+    	var returnDate = '';
+  		var origin = 'DFW';
+  		var destination = 'LAX';
+  		var departuredate = new Date();
+		returnDate.setDate(departuredate.getDate() + 1); 
+		var depWindow = '09001200';
+  		sabre.requestFlightInfo(origin,destination,formateDate(departureDate),formatDate(returnDate),depWindow).then(function(data){
+  			//sendback data
+  			console.log("sendback");
 
-  //   test.forEach(function (flight){
-  //   	var string = 'Flight AA'+flight.flightNumber+ 'leaving DFW'+ flight.deptDateTime+'arriving at LAX'+ flight.arrivalDateTime+' price is $'+flight.totalFare;
-  //   	googleapp.ask(string);
-  //   	console.log(string);
-  //   });
+  		});
   		googleapp.ask('Flight AA23leaving DFW2017-07-07T05:50:00arriving at LAX2017-07-07T08:44:00 price is $366.40');
   		googleapp.ask('Flight AA171leaving DFW2017-07-07T06:00:00arriving at LAX2017-07-07T09:10:00 price is $366.40');
     
   }
 
+  function flightPicked (app) {
+
+    //do payment
+    //send Email
+  }
+
   const actionMap = new Map();
-  actionMap.set('showflights', responseHandler);
+  actionMap.set('showflights', flightResponseHandler);
+  actionMap.set('pickFlight', flightPicked);
 
   googleapp.handleRequest(actionMap);
 };
+
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
 
 
 
@@ -116,22 +139,22 @@ var yourAction = function(request, response) {
 
 
 // Expose app
-var test = [ { totalFare: '366.40',
-    flightNumber: 23,
-    deptDateTime: '2017-07-07T05:50:00',
-    arrivalDateTime: '2017-07-07T08:44:00' },
-  { totalFare: '366.40',
-    flightNumber: 171,
-    deptDateTime: '2017-07-07T06:00:00',
-    arrivalDateTime: '2017-07-07T09:10:00' },
-  { totalFare: '366.40',
-    flightNumber: 171,
-    deptDateTime: '2017-07-07T06:00:00',
-    arrivalDateTime: '2017-07-07T09:10:00' } ];
-    test.forEach(function (flight){
-    	var string = 'Flight AA'+flight.flightNumber+ 'leaving DFW'+ flight.deptDateTime+'arriving at LAX'+ flight.arrivalDateTime+' price is $'+flight.totalFare;
-    	//googleapp.ask(string);
-    	console.log(string);
-    });
+// var test = [ { totalFare: '366.40',
+//     flightNumber: 23,
+//     deptDateTime: '2017-07-07T05:50:00',
+//     arrivalDateTime: '2017-07-07T08:44:00' },
+//   { totalFare: '366.40',
+//     flightNumber: 171,
+//     deptDateTime: '2017-07-07T06:00:00',
+//     arrivalDateTime: '2017-07-07T09:10:00' },
+//   { totalFare: '366.40',
+//     flightNumber: 171,
+//     deptDateTime: '2017-07-07T06:00:00',
+//     arrivalDateTime: '2017-07-07T09:10:00' } ];
+//     test.forEach(function (flight){
+//     	var string = 'Flight AA'+flight.flightNumber+ 'leaving DFW'+ flight.deptDateTime+'arriving at LAX'+ flight.arrivalDateTime+' price is $'+flight.totalFare;
+//     	//googleapp.ask(string);
+//     	console.log(string);
+//     });
 exports = module.exports = app;
 
