@@ -93,7 +93,7 @@ var yourAction = function(request, response) {
   }
 
   const actionMap = new Map();
-  actionMap.set('BookFlight', responseHandler);
+  actionMap.set('ShowFlights', responseHandler);
 
   googleapp.handleRequest(actionMap);
 };
