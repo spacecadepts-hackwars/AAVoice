@@ -26,19 +26,27 @@ require('./lib/config/express')(app);
 
 app.listen(config.port, function () {
   console.log('Express server listening on port %d in %s mode', config.port, app.get('env'));
-  //   		var origin = 'DFW';
-  // 		var destination = 'LAX';
-  // 		var departureDate = new Date();
-		// var returnDate = new Date();
-		// returnDate.setDate(departureDate.getDate() + 1); 
-		// var depWindow = '09001200';
-  // 		sabre.requestFlightInfo(origin,destination,formatDate(departureDate),formatDate(returnDate),depWindow).then(function(data){
-  // 			//sendback data
-  // 			console.log("sendback");
 
-  // 		});
+  var name = 'Kevin Chi';
+  var email;
+  var issued_date = 'May 20, 2017';
+  var flight_date = 'Saturday, May 27, 2017';
+  var dep_time;
+  var dest_time;
+  var origin_city = 'Austin';
+  var dest_city = 'San Francisco';
+  var origin = 'AUS';
+  var dest = 'SFO';
+  var fare = '100.45';
+  var taxes = '12.00';
+  var total = '112.45';
+  
+  mail.sendEmail(name, email, issued_date, flight_date, dep_time, dest_time, origin_city, dest_city, origin, dest, fare, taxes, total);
+  // sabre.requestFlightInfo();
+
   //mail.sendEmail();
   //sabre.requestFlightInfo();
+
  //  api.get(getFlights, function (error,result){
  //    console.log(result);
 	// });
