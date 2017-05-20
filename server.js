@@ -26,6 +26,26 @@ app.listen(config.port, function () {
   // mastercard.sendPayment(amount,paymentDescription,expiraryMonth,expiraryYear,cardCVC,numb);
 });
 
+app.post("/auth", function (request, response) {
+  console.log(request.body);
+});
+
+
+app.post("/token", function (request, response) {
+  console.log(request.body);
+});
+
+app.get("/flights",function(request, response){
+    // do something with id
+    // send a response to user based on id
+    var obj = { flight : test, Content : "content "};
+
+    response.writeHead(200, {"Content-Type": "application/json"});
+    response.write(JSON.stringify(obj));
+});
+
+
+
 // app.use(bodyParser.urlencoded());
 // app.use(bodyParser.json());
 
