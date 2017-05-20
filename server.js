@@ -38,7 +38,7 @@ app.post("/token", function (request, response) {
 app.get("/flights",function(request, response){
     // do something with id
     // send a response to user based on id
-    var obj = { flight : test, Content : "content "};
+    var obj = { flight : 'test', Content : "content "};
 
     response.writeHead(200, {"Content-Type": "application/json"});
     response.write(JSON.stringify(obj));
