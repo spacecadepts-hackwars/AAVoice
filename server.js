@@ -112,32 +112,40 @@ var yourAction = function(request, response) {
 		depWindow = parseInt(depWindow.substring(0,2));
 		var secondDepWindow = depWindow+6;
 		depWindow = depWindow.toString()+'00'+secondDepWindow+'00';
+
+		var formattedDep = formatDate(departureDate);
+		var formattedRet = formatDate(returnDate);
+		formattedDep = formattedDep.replace("T", " at ");
+		formattedRet = formattedRet.replace("T", " at ");
 		// var depWindow = '09001200';
-		console.log(origin+' '+destination+' ' +formatDate(departureDate)+ ' '+formatDate(returnDate)+ ' '+depWindow);
+		console.log(origin+' '+destination+' ' +formattedDep+ ' '+formattedRet+ ' '+depWindow);
   		sabre.requestFlightInfo(origin,destination,formatDate(departureDate),formatDate(returnDate),depWindow).then(function(data){
 			//sendback data
 			console.log(data[0]);
 			var flightInfo = data[0];
+			flightInfo.deptDateTime = flightInfo.deptDateTime.replace("T", " at ");
+			flightInfo.arrivalDateTime = flightInfo.arrivalDateTime.replace("T", " at ");
+
 			var string = 'Flight AA'+flightInfo.flightNumber+' leaving '+origin+' at '+flightInfo.deptDateTime+ ' arriving at '+destination+' '+flightInfo.arrivalDateTime+' price is $'+flightInfo.totalFare+'.';
-			var ask = 'This is the lowest fare for your preferences. Do you want to purchase this flight?';
+			var ask = 'This is the lowest fare at your preferences. Do you want to purchase this flight?';
 			console.log(string);
 			googleapp.ask(string+ask);
 
 		}).catch(function (error) {
-    		googleapp.ask("Sorry could not find the information you are looking for.");
+    		googleapp.ask("Sorry we dont have any flights at this time");
 		}).done();
     
   }
 
   function flightPicked (app) {
-
+  	console.log('FlightPicked');
     //do payment
     //send Email
   }
 
   const actionMap = new Map();
   actionMap.set('BookFlights', flightResponseHandler);
-  // actionMap.set('BookFlightsTo', flightResponseHandler);
+  actionMap.set('BookFlightsFrom.BookFlightsFrom', flightResponseHandler);
 
   googleapp.handleRequest(actionMap);
 };
