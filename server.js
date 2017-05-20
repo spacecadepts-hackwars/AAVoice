@@ -130,8 +130,8 @@ var yourAction = function(request, response) {
 			var flightInfo = data[0];
 			flightInfo.deptDateTime = flightInfo.deptDateTime.replace("T", " at ");
 			flightInfo.arrivalDateTime = flightInfo.arrivalDateTime.replace("T", " at ");
-			flightInfo.deptDateTime = flightInfo.deptDateTime.substring(0,4);
-			flightInfo.arrivalDateTime = flightInfo.arrivalDateTime.substring(0,4);
+			flightInfo.deptDateTime = flightInfo.deptDateTime.substring(0,18);
+			flightInfo.arrivalDateTime = flightInfo.arrivalDateTime.substring(0,18);
 
 			var string = 'Flight AA'+flightInfo.flightNumber+' leaving '+origin+' at '+flightInfo.deptDateTime+ ' arriving at '+destination+' '+flightInfo.arrivalDateTime+' price is $'+flightInfo.totalFare+'.';
 			var ask = 'This is the lowest fare at your preferences. Do you want to purchase this flight?';
@@ -167,7 +167,7 @@ var yourAction = function(request, response) {
 
   const actionMap = new Map();
   actionMap.set('BookFlights', flightResponseHandler);
-  actionMap.set('BookFlightsFrom.BookFlightsFrom', flightPicked);
+  actionMap.set('BookFlightsFrom.BookFlightsFrom-yes', flightPicked);
 
   googleapp.handleRequest(actionMap);
 };
