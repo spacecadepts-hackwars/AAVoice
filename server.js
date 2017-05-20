@@ -83,6 +83,7 @@ var yourAction = function(request, response) {
     test.forEach(function (flight){
     	var string = 'Flight AA'+flight.flightNumber+ 'leaving DFW'+ flight.deptDateTime+'arriving at LAX'+ flight.arrivalDateTime+' price is $'+flight.totalFare;
     	googleapp.ask(string);
+    	console.log(string);
     });
     
   }
