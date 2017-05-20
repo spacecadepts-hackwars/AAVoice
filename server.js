@@ -121,7 +121,7 @@ var yourAction = function(request, response) {
 
   const actionMap = new Map();
   actionMap.set('BookFlightsFrom', flightResponseHandler);
-  actionMap.set('BookFlightsTo', flightPicked);
+  actionMap.set('BookFlightsTo', flightResponseHandler);
 
   googleapp.handleRequest(actionMap);
 };
