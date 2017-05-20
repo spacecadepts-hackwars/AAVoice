@@ -123,7 +123,9 @@ var yourAction = function(request, response) {
 			console.log(string);
 			googleapp.ask(string+ask);
 
-		});
+		}).catch(function (error) {
+    		googleapp.ask("Sorry could not find the information you are looking for.");
+		}).done();
     
   }
 
