@@ -91,7 +91,7 @@ var yourAction = function(request, response) {
   const googleapp = new App({request, response});
   console.log('Request headers: ' + JSON.stringify(request.headers));
   console.log('Request body: ' + JSON.stringify(request.body));
-  var reqBody = JSON.parse(request.body.result.parameters);
+  var reqBody = request.body.result.parameters;
   // Fulfill action business logic
   function flightResponseHandler (app) {
 
