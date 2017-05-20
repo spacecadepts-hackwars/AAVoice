@@ -64,6 +64,8 @@ var yourAction = function(request, response) {
 
   // Fulfill action business logic
   function responseHandler (app) {
+
+  	console.log("HEREEEEEEEEEEEEEEE");
     // Complete your fulfillment logic and send a response
 
     //get entities
