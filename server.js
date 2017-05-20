@@ -130,8 +130,8 @@ var yourAction = function(request, response) {
 			var flightInfo = data[0];
 			flightInfo.deptDateTime = flightInfo.deptDateTime.replace("T", " at ");
 			flightInfo.arrivalDateTime = flightInfo.arrivalDateTime.replace("T", " at ");
-			flightInfo.deptDateTime = flightInfo.deptDateTime.substring(0,18);
-			flightInfo.arrivalDateTime = flightInfo.arrivalDateTime.substring(0,18);
+			flightInfo.deptDateTime = flightInfo.deptDateTime.substring(0,19);
+			flightInfo.arrivalDateTime = flightInfo.arrivalDateTime.substring(0,19);
 
 			var string = 'Flight AA'+flightInfo.flightNumber+' leaving '+origin+' at '+flightInfo.deptDateTime+ ' arriving at '+destination+' '+flightInfo.arrivalDateTime+' price is $'+flightInfo.totalFare+'.';
 			var ask = 'This is the lowest fare at your preferences. Do you want to purchase this flight?';
@@ -154,6 +154,7 @@ var yourAction = function(request, response) {
   		var currentDate = new Date();
   		var taxes = '11.23';
   		var total = flightInfo.totalFare +taxes;
+  		console.log("John Mackoy", "harrib4@gmail.com", currentDate.toString(), departureDate, flightInfo.deptDateTime, flightInfo.arrivalDateTime, origin, destination, origin, destination, flightInfo.totalFare, '11.23', total);
   		mail.sendEmail("John Mackoy", "harrib4@gmail.com", currentDate.toString(), departureDate, flightInfo.deptDateTime, flightInfo.arrivalDateTime, origin, destination, origin, destination, flightInfo.totalFare, '11.23', total);
   		googleapp.ask("Booking confirmed. A confirmation email with your trip details will be sent shortly. Is there anything else I can help you with?");
   	}
