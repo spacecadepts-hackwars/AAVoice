@@ -106,17 +106,16 @@ var yourAction = function(request, response) {
 		returnDate.setDate(departureDate.getDate() + 1); 
 		var depWindow = reqBody.dep_time;
 		depWindow = parseInt(depWindow.substring(0,2));
-		var secondDepWindow = depWindow+3;
+		var secondDepWindow = depWindow+6;
 		depWindow = depWindow.toString()+'00'+secondDepWindow+'00';
 		// var depWindow = '09001200';
 		console.log(origin+' '+destination+' ' +formatDate(departureDate)+ ' '+formatDate(returnDate)+ ' '+depWindow);
   		sabre.requestFlightInfo(origin,destination,formatDate(departureDate),formatDate(returnDate),depWindow).then(function(data){
 			//sendback data
-			console.log(data);
+			var flightInfo = data[0];
+			googleapp.ask('Flight AA'+flightNumber+' leaving '+origin+' at '+deptDateTime+ 'arriving at '+destination+' '+arrivalDateTime+' price is $'+totalFare);
 
 		});
-  		googleapp.ask('Flight AA23leaving DFW2017-07-07T05:50:00arriving at LAX2017-07-07T08:44:00 price is $366.40');
-  		googleapp.ask('Flight AA171leaving DFW2017-07-07T06:00:00arriving at LAX2017-07-07T09:10:00 price is $366.40');
     
   }
 
