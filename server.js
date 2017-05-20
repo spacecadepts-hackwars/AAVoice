@@ -67,24 +67,26 @@ var yourAction = function(request, response) {
     // Complete your fulfillment logic and send a response
 
     //get entities
-    var test = [ { totalFare: '366.40',
-    flightNumber: 23,
-    deptDateTime: '2017-07-07T05:50:00',
-    arrivalDateTime: '2017-07-07T08:44:00' },
-  { totalFare: '366.40',
-    flightNumber: 171,
-    deptDateTime: '2017-07-07T06:00:00',
-    arrivalDateTime: '2017-07-07T09:10:00' },
-  { totalFare: '366.40',
-    flightNumber: 171,
-    deptDateTime: '2017-07-07T06:00:00',
-    arrivalDateTime: '2017-07-07T09:10:00' } ];
+  //   var test = [ { totalFare: '366.40',
+  //   flightNumber: 23,
+  //   deptDateTime: '2017-07-07T05:50:00',
+  //   arrivalDateTime: '2017-07-07T08:44:00' },
+  // { totalFare: '366.40',
+  //   flightNumber: 171,
+  //   deptDateTime: '2017-07-07T06:00:00',
+  //   arrivalDateTime: '2017-07-07T09:10:00' },
+  // { totalFare: '366.40',
+  //   flightNumber: 171,
+  //   deptDateTime: '2017-07-07T06:00:00',
+  //   arrivalDateTime: '2017-07-07T09:10:00' } ];
 
-    test.forEach(function (flight){
-    	var string = 'Flight AA'+flight.flightNumber+ 'leaving DFW'+ flight.deptDateTime+'arriving at LAX'+ flight.arrivalDateTime+' price is $'+flight.totalFare;
-    	googleapp.ask(string);
-    	console.log(string);
-    });
+  //   test.forEach(function (flight){
+  //   	var string = 'Flight AA'+flight.flightNumber+ 'leaving DFW'+ flight.deptDateTime+'arriving at LAX'+ flight.arrivalDateTime+' price is $'+flight.totalFare;
+  //   	googleapp.ask(string);
+  //   	console.log(string);
+  //   });
+  		googleapp.ask('Flight AA23leaving DFW2017-07-07T05:50:00arriving at LAX2017-07-07T08:44:00 price is $366.40');
+  		googleapp.ask('Flight AA171leaving DFW2017-07-07T06:00:00arriving at LAX2017-07-07T09:10:00 price is $366.40');
     
   }
 
