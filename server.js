@@ -26,8 +26,8 @@ require('./lib/config/express')(app);
 
 app.listen(config.port, function () {
   console.log('Express server listening on port %d in %s mode', config.port, app.get('env'));
-  mail.sendEmail();
-  // sabre.requestFlightInfo();
+  //mail.sendEmail();
+  sabre.requestFlightInfo();
  //  api.get(getFlights, function (error,result){
  //    console.log(result);
 	// });
@@ -67,7 +67,24 @@ var yourAction = function(request, response) {
     // Complete your fulfillment logic and send a response
 
     //get entities
-    googleapp.ask('Flight AA322 leaving DFW 3:30 arriving at LAX 6:40 price is $300');
+    var test = [ { totalFare: '366.40',
+    flightNumber: 23,
+    deptDateTime: '2017-07-07T05:50:00',
+    arrivalDateTime: '2017-07-07T08:44:00' },
+  { totalFare: '366.40',
+    flightNumber: 171,
+    deptDateTime: '2017-07-07T06:00:00',
+    arrivalDateTime: '2017-07-07T09:10:00' },
+  { totalFare: '366.40',
+    flightNumber: 171,
+    deptDateTime: '2017-07-07T06:00:00',
+    arrivalDateTime: '2017-07-07T09:10:00' } ];
+
+    test.forEach(function (flight){
+    	var string = 'Flight AA'+flightNumber+ 'leaving DFW'+ deptDateTime+'arriving at LAX'+ arrivalDateTime+' price is $'+totalFare;
+    	googleapp.ask(string);
+    });
+    
   }
 
   const actionMap = new Map();
