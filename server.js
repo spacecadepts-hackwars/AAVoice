@@ -120,8 +120,8 @@ var yourAction = function(request, response) {
   }
 
   const actionMap = new Map();
-  actionMap.set('BookFlightsFrom', flightResponseHandler);
-  actionMap.set('BookFlightsTo', flightResponseHandler);
+  actionMap.set('BookFlights', flightResponseHandler);
+  // actionMap.set('BookFlightsTo', flightResponseHandler);
 
   googleapp.handleRequest(actionMap);
 };
