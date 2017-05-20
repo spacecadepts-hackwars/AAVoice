@@ -27,7 +27,7 @@ require('./lib/config/express')(app);
 app.listen(config.port, function () {
   console.log('Express server listening on port %d in %s mode', config.port, app.get('env'));
   //mail.sendEmail();
-  sabre.requestFlightInfo();
+  //sabre.requestFlightInfo();
  //  api.get(getFlights, function (error,result){
  //    console.log(result);
 	// });
@@ -81,7 +81,7 @@ var yourAction = function(request, response) {
     arrivalDateTime: '2017-07-07T09:10:00' } ];
 
     test.forEach(function (flight){
-    	var string = 'Flight AA'+flightNumber+ 'leaving DFW'+ deptDateTime+'arriving at LAX'+ arrivalDateTime+' price is $'+totalFare;
+    	var string = 'Flight AA'+flight.flightNumber+ 'leaving DFW'+ flight.deptDateTime+'arriving at LAX'+ flight.arrivalDateTime+' price is $'+flight.totalFare;
     	googleapp.ask(string);
     });
     
@@ -111,5 +111,22 @@ var yourAction = function(request, response) {
 
 
 // Expose app
+var test = [ { totalFare: '366.40',
+    flightNumber: 23,
+    deptDateTime: '2017-07-07T05:50:00',
+    arrivalDateTime: '2017-07-07T08:44:00' },
+  { totalFare: '366.40',
+    flightNumber: 171,
+    deptDateTime: '2017-07-07T06:00:00',
+    arrivalDateTime: '2017-07-07T09:10:00' },
+  { totalFare: '366.40',
+    flightNumber: 171,
+    deptDateTime: '2017-07-07T06:00:00',
+    arrivalDateTime: '2017-07-07T09:10:00' } ];
+    test.forEach(function (flight){
+    	var string = 'Flight AA'+flight.flightNumber+ 'leaving DFW'+ flight.deptDateTime+'arriving at LAX'+ flight.arrivalDateTime+' price is $'+flight.totalFare;
+    	//googleapp.ask(string);
+    	console.log(string);
+    });
 exports = module.exports = app;
 
