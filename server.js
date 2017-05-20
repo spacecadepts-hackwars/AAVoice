@@ -42,7 +42,7 @@ app.listen(config.port, function () {
   var fare = '100.45';
   var taxes = '12.00';
   var total = '112.45';
-  //mail.sendEmail('John Mackoy', 'harrib4@gmail.com', 'Sat May 20 2017 17:01:57 GMT+0000 (UTC)', 'Sat May 20 2017 17:01:57 GMT+0000 (UTC)', 'Sat May 20 2017 17:01:57 GMT+0000 (UTC)', 'Sat May 20 2017 17:01:57 GMT+0000 (UTC)', 'Dallas', 'Phoenix', 'DFW', 'PHX', '446.40', '11.23', '4011.23');
+  // mail.sendEmail('John Mackoy', 'jtmackoy@mackoy.net', 'Sat May 20 2017 17:01:57 GMT+0000 (UTC)', 'Sat May 20 2017 17:01:57 GMT+0000 (UTC)', 'Sat May 20 2017 17:01:57 GMT+0000 (UTC)', 'Sat May 20 2017 17:01:57 GMT+0000 (UTC)', 'Dallas', 'Phoenix', 'DFW', 'PHX', '446.40', '11.23', '4011.23');
   // sabre.requestFlightInfo();
 	var origin = 'DFW';
 	var destination = 'LAX';
@@ -157,9 +157,9 @@ var yourAction = function(request, response) {
 
   		var total = parseInt(flightInfo.totalFare) + parseInt(taxes);
   		total = total.toString();
-  		console.log("John Mackoy", "harrib4@gmail.com", currentDate.toString(), departureDate, flightInfo.deptDateTime, flightInfo.arrivalDateTime, origin, destination, origin, destination, flightInfo.totalFare, '11.23', total);
-  		mail.sendEmail("John Mackoy", "harrib4@gmail.com", currentDate.toString(), departureDate, flightInfo.deptDateTime, flightInfo.arrivalDateTime, origin.toString(), destination, origin.toString(), destination, flightInfo.totalFare, '11.23', total);
-  		googleapp.ask("Booking confirmed. A confirmation email with your trip details will be sent shortly");
+  		console.log("John Mackoy", "jtmackoy@mackoy.net", currentDate.toString(), departureDate, flightInfo.deptDateTime, flightInfo.arrivalDateTime, origin, destination, origin, destination, flightInfo.totalFare, '11.23', total);
+  		mail.sendEmail("John Mackoy", "jtmackoy@mackoy.net", currentDate.toString(), departureDate, flightInfo.deptDateTime, flightInfo.arrivalDateTime, origin.toString(), destination, origin.toString(), destination, flightInfo.totalFare, '11.23', total);
+  		googleapp.ask("Booking confirmed. A confirmation email with your trip details will be sent shortly. Can I help you with something else?");
   	}
   	else
   	{
