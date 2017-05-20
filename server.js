@@ -1,6 +1,7 @@
 'use strict';
 
 var express = require('express'),
+	sabre = require('./lib/controllers/sabre.js'),
     router = require('express').Router();
 var bodyParser = require('body-parser'); 
 var mastercard = require('./lib/controllers/mastercard.js'),
@@ -24,6 +25,7 @@ require('./lib/config/express')(app);
 
 app.listen(config.port, function () {
   console.log('Express server listening on port %d in %s mode', config.port, app.get('env'));
+  sabre.requestFlightInfo();
  //  api.get(getFlights, function (error,result){
  //    console.log(result);
 	// });
