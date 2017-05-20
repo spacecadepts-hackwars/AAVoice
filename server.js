@@ -112,9 +112,10 @@ var yourAction = function(request, response) {
 		console.log(origin+' '+destination+' ' +formatDate(departureDate)+ ' '+formatDate(returnDate)+ ' '+depWindow);
   		sabre.requestFlightInfo(origin,destination,formatDate(departureDate),formatDate(returnDate),depWindow).then(function(data){
 			//sendback data
+			console.log('----------------'+data);
 			var flightInfo = data[0];
 			var string = 'Flight AA'+flightNumber+' leaving '+origin+' at '+deptDateTime+ 'arriving at '+destination+' '+arrivalDateTime+' price is $'+totalFare;
-			console.log('----------------'+string);
+			console.log('----------------!!!!!!!!!!!!!'+string);
 			googleapp.ask(string);
 
 		});
