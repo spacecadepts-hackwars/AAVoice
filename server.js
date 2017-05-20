@@ -51,9 +51,10 @@ app.listen(config.port, function () {
 	returnDate.setDate(departureDate.getDate() + 1); 
 	var depWindow = '09001200';
 		sabre.requestFlightInfo(origin,destination,formatDate(departureDate),formatDate(returnDate),depWindow).then(function(data){
-			//sendback data
-			console.log(data);
-
+			console.log(data[0]);
+			var flightInfo = data[0];
+			var string = 'Flight AA'+flightInfo.flightNumber+' leaving '+origin+' at '+flightInfo.deptDateTime+ ' arriving at '+destination+' '+flightInfo.arrivalDateTime+' price is $'+flightInfo.totalFare;
+			console.log('----------------!!!!!!!!!!!!!'+string);
 		});
   //mail.sendEmail();
   //sabre.requestFlightInfo();
@@ -112,10 +113,10 @@ var yourAction = function(request, response) {
 		console.log(origin+' '+destination+' ' +formatDate(departureDate)+ ' '+formatDate(returnDate)+ ' '+depWindow);
   		sabre.requestFlightInfo(origin,destination,formatDate(departureDate),formatDate(returnDate),depWindow).then(function(data){
 			//sendback data
-			console.log('----------------'+data[0].currentFlightInfo);
-			var flightInfo = data[0].currentFlightInfo;
-			var string = 'Flight AA'+flightNumber+' leaving '+origin+' at '+deptDateTime+ 'arriving at '+destination+' '+arrivalDateTime+' price is $'+totalFare;
-			console.log('----------------!!!!!!!!!!!!!'+string);
+			console.log(data[0]);
+			var flightInfo = data[0];
+			var string = 'Flight AA'+flightInfo.flightNumber+' leaving '+origin+' at '+flightInfo.deptDateTime+ ' arriving at '+destination+' '+flightInfo.arrivalDateTime+' price is $'+flightInfo.totalFare;
+			console.log(string);
 			googleapp.ask(string);
 
 		});
