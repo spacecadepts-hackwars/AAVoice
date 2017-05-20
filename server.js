@@ -90,19 +90,25 @@ var yourAction = function(request, response) {
   const googleapp = new App({request, response});
   console.log('Request headers: ' + JSON.stringify(request.headers));
   console.log('Request body: ' + JSON.stringify(request.body));
-
+  var reqBody = JSON.parse(request.body);
   // Fulfill action business logic
   function flightResponseHandler (app) {
 
     // Complete your fulfillment logic and send a response
 
     //get entities
+
     	var returnDate = '';
-  		var origin = 'DFW';
-  		var destination = 'LAX';
-  		var departuredate = new Date();
+  		var origin = reqBody.airport_from;
+  		var destination = reqBody.airport_to;
+  		var departuredate = new Date(reqBody.dep_date);
 		returnDate.setDate(departuredate.getDate() + 1); 
-		var depWindow = '09001200';
+		var depWindow = reqBody.dep_time;
+		depWindow = parseInt(depWindow.substring(0,2));
+		var secondDepWindow += 3;
+		depWindow = depWindow.toString()+'00'+secondDepWindow+'00';
+		// var depWindow = '09001200';
+		console.log(origin+' '+destination+' ' +formatDate(departureDate)+ ' '+formatDate(returnDate)+ ' '+depWindow);
   		sabre.requestFlightInfo(origin,destination,formatDate(departureDate),formatDate(returnDate),depWindow).then(function(data){
 			//sendback data
 			console.log(data);
