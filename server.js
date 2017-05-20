@@ -99,7 +99,9 @@ var yourAction = function(request, response) {
   console.log('Request headers: ' + JSON.stringify(request.headers));
   console.log('Request body: ' + JSON.stringify(request.body));
   var reqBody = request.body.result.parameters;
-  var sessionId = request.body.sessionId
+  var sessionId = request.body.sessionId;
+  var formattedDep;
+  var formattedRet;
   // Fulfill action business logic
   function flightResponseHandler (app) {
 
@@ -117,8 +119,8 @@ var yourAction = function(request, response) {
 		var secondDepWindow = depWindow+6;
 		depWindow = depWindow.toString()+'00'+secondDepWindow+'00';
 
-		var formattedDep = formatDate(departureDate);
-		var formattedRet = formatDate(returnDate);
+		formattedDep = formatDate(departureDate);
+		formattedRet = formatDate(returnDate);
 		formattedDep = formattedDep.replace("T", " at ");
 		formattedRet = formattedRet.replace("T", " at ");
 		// var depWindow = '09001200';
@@ -156,7 +158,7 @@ var yourAction = function(request, response) {
   		var total = parseInt(flightInfo.totalFare) + parseInt(taxes);
   		total = total.toString();
   		console.log("John Mackoy", "harrib4@gmail.com", currentDate.toString(), departureDate, flightInfo.deptDateTime, flightInfo.arrivalDateTime, origin, destination, origin, destination, flightInfo.totalFare, '11.23', total);
-  		mail.sendEmail("John Mackoy", "harrib4@gmail.com", currentDate.toString(), departureDate, flightInfo.deptDateTime, flightInfo.arrivalDateTime, origin, destination, origin, destination, flightInfo.totalFare, '11.23', total);
+  		mail.sendEmail("John Mackoy", "harrib4@gmail.com", currentDate.toString(), departureDate, flightInfo.deptDateTime, flightInfo.arrivalDateTime, origin.toString(), destination, origin.toString(), destination, flightInfo.totalFare, '11.23', total);
   		googleapp.ask("Booking confirmed. A confirmation email with your trip details will be sent shortly. Is there anything else I can help you with?");
   	}
   	else
