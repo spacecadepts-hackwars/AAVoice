@@ -42,10 +42,7 @@ app.post("/token", function (request, response) {
 app.get("/flights",function(request, response){
     // do something with id
     // send a response to user based on id
-    var obj = { flight : 'test', Content : "content "};
-
-    response.writeHead(200, {"Content-Type": "application/json"});
-    response.write(JSON.stringify(obj));
+    yourAction(request,response);
 });
 
 
@@ -54,7 +51,7 @@ app.get("/flights",function(request, response){
 const App = require('actions-on-google').ApiAiApp;
 
 // [START YourAction]
-exports.yourAction = (request, response) => {
+var yourAction = function(request, response) {
   const app = new App({request, response});
   console.log('Request headers: ' + JSON.stringify(request.headers));
   console.log('Request body: ' + JSON.stringify(request.body));
