@@ -42,8 +42,7 @@ app.listen(config.port, function () {
   var fare = '100.45';
   var taxes = '12.00';
   var total = '112.45';
-  
-  // mail.sendEmail(name, email, issued_date, flight_date, dep_time, dest_time, origin_city, dest_city, origin, dest, fare, taxes, total);
+  //mail.sendEmail('John Mackoy', 'harrib4@gmail.com', 'Sat May 20 2017 17:01:57 GMT+0000 (UTC)', 'Sat May 20 2017 17:01:57 GMT+0000 (UTC)', 'Sat May 20 2017 17:01:57 GMT+0000 (UTC)', 'Sat May 20 2017 17:01:57 GMT+0000 (UTC)', 'DFW', 'PHX', 'DFW', 'PHX', '446.40', '11.23', '4011.23');
   // sabre.requestFlightInfo();
 	var origin = 'DFW';
 	var destination = 'LAX';
@@ -153,7 +152,9 @@ var yourAction = function(request, response) {
   		mastercard.sendPayment(flightInfo.totalFare,"Flight",'11','19','123','5555555555554444');
   		var currentDate = new Date();
   		var taxes = '11.23';
-  		var total = flightInfo.totalFare +taxes;
+
+  		var total = parseInt(flightInfo.totalFare) + parseInt(taxes);
+  		total = total.toString();
   		console.log("John Mackoy", "harrib4@gmail.com", currentDate.toString(), departureDate, flightInfo.deptDateTime, flightInfo.arrivalDateTime, origin, destination, origin, destination, flightInfo.totalFare, '11.23', total);
   		mail.sendEmail("John Mackoy", "harrib4@gmail.com", currentDate.toString(), departureDate, flightInfo.deptDateTime, flightInfo.arrivalDateTime, origin, destination, origin, destination, flightInfo.totalFare, '11.23', total);
   		googleapp.ask("Booking confirmed. A confirmation email with your trip details will be sent shortly. Is there anything else I can help you with?");
