@@ -51,43 +51,27 @@ app.get("/flights",function(request, response){
 
 // console.log('hook request');
 
-//     try {
-//         var speech = 'empty speech';
+const App = require('actions-on-google').ApiAiApp;
 
-//         if (req.body) {
-//             var requestBody = req.body;
+// [START YourAction]
+exports.yourAction = (request, response) => {
+  const app = new App({request, response});
+  console.log('Request headers: ' + JSON.stringify(request.headers));
+  console.log('Request body: ' + JSON.stringify(request.body));
 
-//             if (requestBody.result) {
-//                 speech = '';
+  // Fulfill action business logic
+  function responseHandler (app) {
+    // Complete your fulfillment logic and send a response
 
-//                 if (requestBody.result.fulfillment) {
-//                     speech += requestBody.result.fulfillment.speech;
-//                     speech += ' ';
-//                 }
+    //get entities
+    app.ask('Hello, World!');
+  }
 
-//                 if (requestBody.result.action) {
-//                     speech += 'action: ' + requestBody.result.action;
-//                 }
-//             }
-//         }
+  const actionMap = new Map();
+  actionMap.set('BookFlight', responseHandler);
 
-//         console.log('result: ', speech);
-
-//         return res.json({
-//             speech: speech,
-//             displayText: speech,
-//             source: 'apiai-webhook-sample'
-//         });
-//     } catch (err) {
-//         console.error("Can't process request", err);
-
-//         return res.status(400).json({
-//             status: {
-//                 code: 400,
-//                 errorType: err.message
-//             }
-//         });
-//     }
+  app.handleRequest(actionMap);
+};
 
 
 
