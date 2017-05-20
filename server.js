@@ -41,9 +41,19 @@ app.listen(config.port, function () {
   var taxes = '12.00';
   var total = '112.45';
   
-  mail.sendEmail(name, email, issued_date, flight_date, dep_time, dest_time, origin_city, dest_city, origin, dest, fare, taxes, total);
+  // mail.sendEmail(name, email, issued_date, flight_date, dep_time, dest_time, origin_city, dest_city, origin, dest, fare, taxes, total);
   // sabre.requestFlightInfo();
+	var origin = 'DFW';
+	var destination = 'LAX';
+	var departureDate = new Date();
+	var returnDate = new Date();
+	returnDate.setDate(departureDate.getDate() + 1); 
+	var depWindow = '09001200';
+		sabre.requestFlightInfo(origin,destination,formatDate(departureDate),formatDate(returnDate),depWindow).then(function(data){
+			//sendback data
+			console.log(data);
 
+		});
   //mail.sendEmail();
   //sabre.requestFlightInfo();
 
@@ -93,11 +103,11 @@ var yourAction = function(request, response) {
   		var departuredate = new Date();
 		returnDate.setDate(departuredate.getDate() + 1); 
 		var depWindow = '09001200';
-  		sabre.requestFlightInfo(origin,destination,formateDate(departureDate),formatDate(returnDate),depWindow).then(function(data){
-  			//sendback data
-  			console.log("sendback");
+  		sabre.requestFlightInfo(origin,destination,formatDate(departureDate),formatDate(returnDate),depWindow).then(function(data){
+			//sendback data
+			console.log(data);
 
-  		});
+		});
   		googleapp.ask('Flight AA23leaving DFW2017-07-07T05:50:00arriving at LAX2017-07-07T08:44:00 price is $366.40');
   		googleapp.ask('Flight AA171leaving DFW2017-07-07T06:00:00arriving at LAX2017-07-07T09:10:00 price is $366.40');
     
@@ -110,8 +120,8 @@ var yourAction = function(request, response) {
   }
 
   const actionMap = new Map();
-  actionMap.set('showflights', flightResponseHandler);
-  actionMap.set('pickFlight', flightPicked);
+  actionMap.set('BookFlightsFrom', flightResponseHandler);
+  actionMap.set('BookFlightsTo', flightPicked);
 
   googleapp.handleRequest(actionMap);
 };
