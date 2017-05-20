@@ -46,6 +46,7 @@ app.listen(config.port, function () {
 	var origin = 'DFW';
 	var destination = 'LAX';
 	var departureDate = new Date();
+	departureDate.setDate(departureDate.getDate() + 10);
 	var returnDate = new Date();
 	returnDate.setDate(departureDate.getDate() + 1); 
 	var depWindow = '09001200';
