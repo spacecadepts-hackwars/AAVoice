@@ -26,6 +26,7 @@ require('./lib/config/express')(app);
 
 app.listen(config.port, function () {
   console.log('Express server listening on port %d in %s mode', config.port, app.get('env'));
+
   var name = 'Kevin Chi';
   var email;
   var issued_date = 'May 20, 2017';
@@ -42,6 +43,10 @@ app.listen(config.port, function () {
   
   mail.sendEmail(name, email, issued_date, flight_date, dep_time, dest_time, origin_city, dest_city, origin, dest, fare, taxes, total);
   // sabre.requestFlightInfo();
+
+  //mail.sendEmail();
+  //sabre.requestFlightInfo();
+
  //  api.get(getFlights, function (error,result){
  //    console.log(result);
 	// });
@@ -78,14 +83,36 @@ var yourAction = function(request, response) {
 
   // Fulfill action business logic
   function responseHandler (app) {
+
+  	console.log("HEREEEEEEEEEEEEEEE");
     // Complete your fulfillment logic and send a response
 
     //get entities
-    googleapp.ask('Flight AA322 leaving DFW 3:30 arriving at LAX 6:40 price is $300');
+  //   var test = [ { totalFare: '366.40',
+  //   flightNumber: 23,
+  //   deptDateTime: '2017-07-07T05:50:00',
+  //   arrivalDateTime: '2017-07-07T08:44:00' },
+  // { totalFare: '366.40',
+  //   flightNumber: 171,
+  //   deptDateTime: '2017-07-07T06:00:00',
+  //   arrivalDateTime: '2017-07-07T09:10:00' },
+  // { totalFare: '366.40',
+  //   flightNumber: 171,
+  //   deptDateTime: '2017-07-07T06:00:00',
+  //   arrivalDateTime: '2017-07-07T09:10:00' } ];
+
+  //   test.forEach(function (flight){
+  //   	var string = 'Flight AA'+flight.flightNumber+ 'leaving DFW'+ flight.deptDateTime+'arriving at LAX'+ flight.arrivalDateTime+' price is $'+flight.totalFare;
+  //   	googleapp.ask(string);
+  //   	console.log(string);
+  //   });
+  		googleapp.ask('Flight AA23leaving DFW2017-07-07T05:50:00arriving at LAX2017-07-07T08:44:00 price is $366.40');
+  		googleapp.ask('Flight AA171leaving DFW2017-07-07T06:00:00arriving at LAX2017-07-07T09:10:00 price is $366.40');
+    
   }
 
   const actionMap = new Map();
-  actionMap.set('BookFlight', responseHandler);
+  actionMap.set('showflights', responseHandler);
 
   googleapp.handleRequest(actionMap);
 };
@@ -108,5 +135,22 @@ var yourAction = function(request, response) {
 
 
 // Expose app
+var test = [ { totalFare: '366.40',
+    flightNumber: 23,
+    deptDateTime: '2017-07-07T05:50:00',
+    arrivalDateTime: '2017-07-07T08:44:00' },
+  { totalFare: '366.40',
+    flightNumber: 171,
+    deptDateTime: '2017-07-07T06:00:00',
+    arrivalDateTime: '2017-07-07T09:10:00' },
+  { totalFare: '366.40',
+    flightNumber: 171,
+    deptDateTime: '2017-07-07T06:00:00',
+    arrivalDateTime: '2017-07-07T09:10:00' } ];
+    test.forEach(function (flight){
+    	var string = 'Flight AA'+flight.flightNumber+ 'leaving DFW'+ flight.deptDateTime+'arriving at LAX'+ flight.arrivalDateTime+' price is $'+flight.totalFare;
+    	//googleapp.ask(string);
+    	console.log(string);
+    });
 exports = module.exports = app;
 
