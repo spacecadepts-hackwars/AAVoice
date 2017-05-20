@@ -39,7 +39,8 @@ app.post("/token", function (request, response) {
   console.log(request.body);
 });
 
-app.get("/flights",function(request, response){
+app.post("/flights",function(request, response){
+	console.log('flightssss :)');
     // do something with id
     // send a response to user based on id
     yourAction(request,response);
@@ -52,7 +53,8 @@ const App = require('actions-on-google').ApiAiApp;
 
 // [START YourAction]
 var yourAction = function(request, response) {
-  const app = new App({request, response});
+  console.log("HERE YOUR ACTION");	
+  const googleapp = new App({request, response});
   console.log('Request headers: ' + JSON.stringify(request.headers));
   console.log('Request body: ' + JSON.stringify(request.body));
 
@@ -61,7 +63,7 @@ var yourAction = function(request, response) {
     // Complete your fulfillment logic and send a response
 
     //get entities
-    app.ask('Hello, World!');
+    googleapp.ask('Hello, World!');
   }
 
   const actionMap = new Map();
