@@ -63,7 +63,7 @@ var yourAction = function(request, response) {
     // Complete your fulfillment logic and send a response
 
     //get entities
-    googleapp.ask('Hello, World!');
+    googleapp.ask('Flight AA322 leaving DFW 3:30 arriving at LAX 6:40 price is $300');
   }
 
   const actionMap = new Map();
