@@ -3,7 +3,7 @@
 var express = require('express'),
     router = require('express').Router();
 var bodyParser = require('body-parser'); 
-var mastercard = require('./lib/controllers/mastercard.js');
+var mastercard = require('./lib/controllers/mastercard.js'),
 api = require('./lib/controllers/api.js');
 
 /**
@@ -24,9 +24,9 @@ require('./lib/config/express')(app);
 
 app.listen(config.port, function () {
   console.log('Express server listening on port %d in %s mode', config.port, app.get('env'));
-  api.get(getFlights, function (error,result){
-    console.log(result);
-	});
+ //  api.get(getFlights, function (error,result){
+ //    console.log(result);
+	// });
   // mastercard.sendPayment(amount,paymentDescription,expiraryMonth,expiraryYear,cardCVC,numb);
 });
 
