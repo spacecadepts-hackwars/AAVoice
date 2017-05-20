@@ -112,7 +112,7 @@ var yourAction = function(request, response) {
 		console.log(origin+' '+destination+' ' +formatDate(departureDate)+ ' '+formatDate(returnDate)+ ' '+depWindow);
   		sabre.requestFlightInfo(origin,destination,formatDate(departureDate),formatDate(returnDate),depWindow).then(function(data){
 			//sendback data
-			console.log('----------------'+data);
+			console.log('----------------'+data[0]);
 			var flightInfo = data[0];
 			var string = 'Flight AA'+flightNumber+' leaving '+origin+' at '+deptDateTime+ 'arriving at '+destination+' '+arrivalDateTime+' price is $'+totalFare;
 			console.log('----------------!!!!!!!!!!!!!'+string);
