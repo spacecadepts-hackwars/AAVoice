@@ -64,7 +64,7 @@ app.listen(config.port, function () {
  //  api.get(getFlights, function (error,result){
  //    console.log(result);
 	// });
-  // mastercard.sendPayment(amount,paymentDescription,expiraryMonth,expiraryYear,cardCVC,numb);
+  
 });
 
 app.post("/auth", function (request, response) {
@@ -88,6 +88,11 @@ app.post("/flights",function(request, response){
 
 const App = require('actions-on-google').ApiAiApp;
 
+var flightInfo='';
+var departureDate = '';
+var origin = '';
+var destination = '';
+
 // [START YourAction]
 var yourAction = function(request, response) {
   console.log("HERE YOUR ACTION");	
@@ -104,9 +109,9 @@ var yourAction = function(request, response) {
     //get entities
 
     	var returnDate = new Date();
-  		var origin = reqBody.airport_from;
-  		var destination = reqBody.airport_to;
-  		var departureDate = new Date(reqBody.dep_date);
+  		origin = reqBody.airport_from;
+  		destination = reqBody.airport_to;
+  		departureDate = new Date(reqBody.dep_date);
 		returnDate.setDate(departureDate.getDate() + 1); 
 		var depWindow = reqBody.dep_time;
 		depWindow = parseInt(depWindow.substring(0,2));
@@ -125,6 +130,8 @@ var yourAction = function(request, response) {
 			var flightInfo = data[0];
 			flightInfo.deptDateTime = flightInfo.deptDateTime.replace("T", " at ");
 			flightInfo.arrivalDateTime = flightInfo.arrivalDateTime.replace("T", " at ");
+			flightInfo.deptDateTime = flightInfo.deptDateTime.substring(0,4);
+			flightInfo.arrivalDateTime = flightInfo.arrivalDateTime.substring(0,4);
 
 			var string = 'Flight AA'+flightInfo.flightNumber+' leaving '+origin+' at '+flightInfo.deptDateTime+ ' arriving at '+destination+' '+flightInfo.arrivalDateTime+' price is $'+flightInfo.totalFare+'.';
 			var ask = 'This is the lowest fare at your preferences. Do you want to purchase this flight?';
@@ -139,6 +146,21 @@ var yourAction = function(request, response) {
 
   function flightPicked (app) {
   	console.log('FlightPicked');
+  	var confirm = reqBody.confirmResponse;
+  	if(confirm)
+  	{
+  		console.log("FLIGHT PICKED");
+  		mastercard.sendPayment(flightInfo.totalFare,"Flight",'11','19','123','5555555555554444');
+  		var currentDate = new Date();
+  		var taxes = '11.23';
+  		var total = flightInfo.totalFare +taxes;
+  		mail.sendEmail("John Mackoy", "harrib4@gmail.com", currentDate.toString(), departureDate, flightInfo.deptDateTime, flightInfo.arrivalDateTime, origin, destination, origin, destination, flightInfo.totalFare, '11.23', total);
+  		googleapp.ask("Booking confirmed. A confirmation email with your trip details will be sent shortly. Is there anything else I can help you with?");
+  	}
+  	else
+  	{
+  		googleapp.ask('Thank you for choosing American Airlines. Have a great flight');
+  	}
     //do payment
     //send Email
   }
