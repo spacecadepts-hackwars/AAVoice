@@ -102,8 +102,8 @@ var yourAction = function(request, response) {
     	var returnDate = new Date();
   		var origin = reqBody.airport_from;
   		var destination = reqBody.airport_to;
-  		var departuredate = new Date(reqBody.dep_date);
-		returnDate.setDate(departuredate.getDate() + 1); 
+  		var departureDate = new Date(reqBody.dep_date);
+		returnDate.setDate(departureDate.getDate() + 1); 
 		var depWindow = reqBody.dep_time;
 		depWindow = parseInt(depWindow.substring(0,2));
 		var secondDepWindow = depWindow+3;
