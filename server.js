@@ -127,13 +127,13 @@ var yourAction = function(request, response) {
   		sabre.requestFlightInfo(origin,destination,formatDate(departureDate),formatDate(returnDate),depWindow).then(function(data){
 			//sendback data
 			console.log(data[0]);
-			var flightInfo = data[0];
+			flightInfo = data[0];
 			flightInfo.deptDateTime = flightInfo.deptDateTime.replace("T", " at ");
 			flightInfo.arrivalDateTime = flightInfo.arrivalDateTime.replace("T", " at ");
 			flightInfo.deptDateTime = flightInfo.deptDateTime.substring(0,19);
 			flightInfo.arrivalDateTime = flightInfo.arrivalDateTime.substring(0,19);
 
-			var string = 'Flight AA'+flightInfo.flightNumber+' leaving '+origin+' at '+flightInfo.deptDateTime+ ' arriving at '+destination+' '+flightInfo.arrivalDateTime+' price is $'+flightInfo.totalFare+'.';
+			var string = 'Flight AA'+flightInfo.flightNumber+' leaving '+origin+' at '+flightInfo.deptDateTime+ ' arriving at '+destination+' '+flightInfo.arrivalDateTime+'.The price is $'+flightInfo.totalFare+'.';
 			var ask = 'This is the lowest fare at your preferences. Do you want to purchase this flight?';
 			console.log(string);
 			googleapp.ask(string+ask);
