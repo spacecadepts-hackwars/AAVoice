@@ -8,6 +8,8 @@ var mastercard = require('./lib/controllers/mastercard.js'),
 	mail = require('./lib/controllers/mail.js'),
 api = require('./lib/controllers/api.js');
 
+var api_ai_client_token = "044f3a213a9a4c4eb160038fe0c80f2f ";
+
 /**
  * Main application file
  */
@@ -93,6 +95,7 @@ var yourAction = function(request, response) {
   console.log('Request headers: ' + JSON.stringify(request.headers));
   console.log('Request body: ' + JSON.stringify(request.body));
   var reqBody = request.body.result.parameters;
+  var sessionId = request.body.sessionId
   // Fulfill action business logic
   function flightResponseHandler (app) {
 
@@ -115,9 +118,10 @@ var yourAction = function(request, response) {
 			//sendback data
 			console.log(data[0]);
 			var flightInfo = data[0];
-			var string = 'Flight AA'+flightInfo.flightNumber+' leaving '+origin+' at '+flightInfo.deptDateTime+ ' arriving at '+destination+' '+flightInfo.arrivalDateTime+' price is $'+flightInfo.totalFare;
+			var string = 'Flight AA'+flightInfo.flightNumber+' leaving '+origin+' at '+flightInfo.deptDateTime+ ' arriving at '+destination+' '+flightInfo.arrivalDateTime+' price is $'+flightInfo.totalFare+'.';
+			var ask = 'This is the lowest fare for your preferences. Do you want to purchase this flight?';
 			console.log(string);
-			googleapp.ask(string);
+			googleapp.ask(string+ask);
 
 		});
     
