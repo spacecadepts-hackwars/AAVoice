@@ -99,7 +99,7 @@ var yourAction = function(request, response) {
 
     //get entities
 
-    	var returnDate = '';
+    	var returnDate = new Date();
   		var origin = reqBody.airport_from;
   		var destination = reqBody.airport_to;
   		var departuredate = new Date(reqBody.dep_date);
